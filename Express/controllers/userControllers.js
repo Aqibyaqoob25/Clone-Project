@@ -11,8 +11,11 @@ const joi = require("joi");
 const createUserSchema = joi.object().keys({
   firstName: joi.string().required(),
   sirName: joi.string().required(),
-  Email: joi.string().required(),
+  email: joi.string().email().required(),
   password: joi.string().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")).required(),
+  day: joi.string().required(),
+  month: joi.string().required(),
+  year: joi.string().required(),
 });
 
 const deleteUserSchema = joi.object().keys({

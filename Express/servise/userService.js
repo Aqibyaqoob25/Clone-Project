@@ -13,7 +13,7 @@ const { hash } = require("bcryptjs");
 module.exports = {
   createUser: async (body) => {
     try {
-      const isUser = await getUserByEmail(body.Email);
+      const isUser = await getUserByEmail(body.email);
       if (isUser.error || isUser.response) {
         return { response: "user with this email already exist" };
       }
@@ -21,8 +21,11 @@ module.exports = {
         userId: uuid(),
         firstName: body.firstName,
         sirName: body.sirName,
-        Email: body.Email,
+        email: body.email,
         password: await hash(body.password, 10),
+        day: body.day,
+        month: body.month,
+        year: body.year,
       };
       const createdUser = await createUser(user);
       if (createdUser.error) {

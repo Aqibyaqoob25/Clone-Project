@@ -5,6 +5,7 @@ const roles = require("./definations/Role");
 const addresses = require("./definations/Address");
 const courses = require("./definations/courses");
 const userCourses = require("./definations/userCourses");
+const session = require("./definations/session");
 
 //relations start here
 addresses.hasOne(users, { foreignKey: "addressId" });
@@ -19,7 +20,11 @@ courses.hasMany(userCourses, { foreignKey: "courseId" });
 userCourses.belongsTo(courses, { foreignKey: "courseId" });
 //relations end here
 
-const models = { users, roles, addresses, courses, userCourses };
+//session relation
+users.hasOne(session, { foreignKey: "userId" }, { unique: true });
+session.belongsTo(users, { foreignKey: "userId" }, { unique: true });
+
+const models = { users, roles, addresses, courses, userCourses, session };
 const db = {};
 db.sequelize = sequelize;
 sequelize.models = models;

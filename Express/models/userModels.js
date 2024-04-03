@@ -14,7 +14,7 @@ module.exports = {
   getAllUser: async () => {
     try {
       const allusers = await models.users.findAll({
-        attributes: ["userId", "firstName", "sirName", "Email"],
+        attributes: ["userId", "firstName", "sirName", "email"],
         // include: [
         //   {
         //     model: models.addresses,
@@ -88,15 +88,65 @@ module.exports = {
     }
   },
 
-  getUserByEmail: async (Email) => {
+  getUserByEmail: async (email) => {
     try {
+      console.log("data ", email);
+
       const gettedUserByEmail = await models.users.findOne({
         where: {
-          Email: Email,
+          email: email,
+        },
+      });
+
+      return {
+        response: gettedUserByEmail,
+      };
+    } catch (error) {
+      return { error: error.message };
+    }
+  },
+  createSession: async (body) => {
+    try {
+      const session = await models.session.create({
+        ...body,
+      });
+
+      return {
+        response: session,
+      };
+    } catch (error) {
+      return { error: error.message };
+    }
+  },
+  getSession: async (userId) => {
+    try {
+      const session = await models.session.findOne({
+        where: {
+          userId: userId,
         },
       });
       return {
-        response: gettedUserByEmail,
+        response: session,
+      };
+    } catch (error) {
+      return { error: error.message };
+    }
+  },
+  updateSession: async (body) => {
+    try {
+      const session = await models.session.update(
+        {
+          ...body,
+        },
+        {
+          where: {
+            userId: body.userId,
+          },
+        }
+      );
+
+      return {
+        response: session,
       };
     } catch (error) {
       return { error: error.message };

@@ -16,12 +16,24 @@ USERS.init(
       type: DataTypes.STRING(),
       allowNull: false,
     },
-    Email: {
+    email: {
       unique: true,
       type: DataTypes.STRING(),
       allowNull: false,
     },
     password: {
+      type: DataTypes.STRING(),
+      allowNull: false,
+    },
+    day: {
+      type: DataTypes.STRING(),
+      allowNull: false,
+    },
+    month: {
+      type: DataTypes.STRING(),
+      allowNull: false,
+    },
+    year: {
       type: DataTypes.STRING(),
       allowNull: false,
     },
