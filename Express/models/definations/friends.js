@@ -1,11 +1,16 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../../bin/dbConnection");
 
-class USERCOURSE extends Model {}
-USERCOURSE.init(
+class Friend extends Model {}
+Friend.init(
   {
-    userCourseId: {
+    friendId: {
       primaryKey: true,
+      type: DataTypes.STRING(),
+    },
+    name: {
+      unique: true,
+      allowNull: false,
       type: DataTypes.STRING(),
     },
   },
@@ -15,4 +20,4 @@ USERCOURSE.init(
     sequelize,
   }
 );
-module.exports = USERCOURSE;
+module.exports = Friend;

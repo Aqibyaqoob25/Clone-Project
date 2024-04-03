@@ -1,15 +1,19 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../../bin/dbConnection");
 
-class ADDRESS extends Model {}
+class MESSAGE extends Model {}
 
-ADDRESS.init(
+MESSAGE.init(
   {
-    addressId: {
+    senderId: {
       primaryKey: true,
       type: DataTypes.STRING(),
     },
-    address: {
+    name: {
+      type: DataTypes.STRING(),
+      allowNull: false,
+    },
+    lastMessage: {
       type: DataTypes.STRING(),
       allowNull: false,
     },
@@ -20,4 +24,4 @@ ADDRESS.init(
     sequelize,
   }
 );
-module.exports = ADDRESS;
+module.exports = MESSAGE;

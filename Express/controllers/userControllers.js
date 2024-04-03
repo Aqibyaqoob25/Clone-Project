@@ -62,6 +62,7 @@ module.exports = {
     try {
       const validate = await deleteUserSchema.validateAsync(req.query);
       const deletedUser = await deleteUser(validate);
+      s;
       if (deletedUser.error) {
         return res.send({
           error: deletedUser.error,

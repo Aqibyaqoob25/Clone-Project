@@ -1,30 +1,27 @@
 const sequelize = require("../bin/dbConnection");
 
 const users = require("./definations/user");
-const roles = require("./definations/Role");
-const addresses = require("./definations/Address");
-const courses = require("./definations/courses");
-const userCourses = require("./definations/userCourses");
+const friends = require("./definations/friends");
+const message = require("./definations/message");
+const post = require("./definations/post");
 const session = require("./definations/session");
 
 //relations start here
-addresses.hasOne(users, { foreignKey: "addressId" });
-users.belongsTo(addresses, { foreignKey: "addressId" });
+users.hasMany(friends, { foreignKey: "userId" });
+friends.belongsTo(users, { foreignKey: "userId" });
 
-roles.hasMany(users, { foreignKey: "roleId" });
-users.belongsTo(roles, { foreignKey: "roleId" });
+users.hasMany(message, { foreignKey: "senderId" });
+message.belongsTo(users, { foreignKey: "senderId" });
 
-users.hasMany(userCourses, { foreignKey: "userId" });
-userCourses.belongsTo(users, { foreignKey: "userId" });
-courses.hasMany(userCourses, { foreignKey: "courseId" });
-userCourses.belongsTo(courses, { foreignKey: "courseId" });
+users.hasMany(post, { foreignKey: "userId" });
+post.belongsTo(users, { foreignKey: "userId" });
 //relations end here
 
 //session relation
 users.hasOne(session, { foreignKey: "userId" }, { unique: true });
 session.belongsTo(users, { foreignKey: "userId" }, { unique: true });
 
-const models = { users, roles, addresses, courses, userCourses, session };
+const models = { users, message, friends, post, session };
 const db = {};
 db.sequelize = sequelize;
 sequelize.models = models;

@@ -1,16 +1,18 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../../bin/dbConnection");
 
-class COURSES extends Model {}
-
-COURSES.init(
+class POST extends Model {}
+POST.init(
   {
-    courseId: {
+    postId: {
       primaryKey: true,
       type: DataTypes.STRING(),
     },
-    courseName: {
-      unique: true,
+    author: {
+      type: DataTypes.STRING(),
+      allowNull: false,
+    },
+    content: {
       type: DataTypes.STRING(),
       allowNull: false,
     },
@@ -21,4 +23,4 @@ COURSES.init(
     sequelize,
   }
 );
-module.exports = COURSES;
+module.exports = POST;
