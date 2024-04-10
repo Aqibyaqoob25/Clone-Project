@@ -13,12 +13,12 @@ const createPostSchema = joi.object().keys({
   content: joi.string().required(),
 });
 const deletePostSchema = joi.object().keys({
-  postId: joi.string().required(),
+  postId: joi.array().required(),
 });
 
 const updatePostSchema = joi.object().keys({
   postId: joi.string().required(),
-  author: joi.string().required(),
+  content: joi.string().required(),
 });
 
 module.exports = {

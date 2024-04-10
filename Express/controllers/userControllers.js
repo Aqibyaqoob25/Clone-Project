@@ -16,6 +16,7 @@ const createUserSchema = joi.object().keys({
   day: joi.string().required(),
   month: joi.string().required(),
   year: joi.string().required(),
+  gender: joi.string().valid("male", "female", "other").required(),
 });
 
 const deleteUserSchema = joi.object().keys({

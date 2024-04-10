@@ -12,7 +12,7 @@ module.exports = {
   },
   getAllPost: async () => {
     try {
-      const post = await models.post.findAll();
+      const post = await models.post.findAll({});
       return { response: post };
     } catch (error) {
       return { error: error.message };
