@@ -3,6 +3,7 @@ const {
   createSession,
   getSession,
   updateSession,
+  deleteSession,
 } = require("../models/userModels");
 const { compare } = require("bcryptjs");
 const { sign } = require("jsonwebtoken");
@@ -62,5 +63,15 @@ module.exports = {
       return { error: error.message };
     }
   },
-  //   logout: () => {},
+  logout: async (body) => {
+    try {
+      const deletedSession = await deleteSession(body.userId);
+      if (deletedSession.error) {
+        return { error: "Failed to logout" };
+      }
+      return { response: "Logout successful" };
+    } catch (error) {
+      return { error: error.message };
+    }
+  },
 };

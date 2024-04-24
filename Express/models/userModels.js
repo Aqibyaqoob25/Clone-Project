@@ -152,4 +152,20 @@ module.exports = {
       return { error: error.message };
     }
   },
+  deleteSession: async (userId) => {
+    try {
+      const deletedSessionCount = await models.session.destroy({
+        where: {
+          userId: userId,
+        },
+      });
+
+      return {
+        response: { deletedCount: deletedSessionCount },
+      };
+    } catch (error) {
+      console.error("Error deleting session:", error);
+      return { error: "Failed to delete session" };
+    }
+  },
 };

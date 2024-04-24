@@ -7,10 +7,13 @@ import {
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Navbar({ changeOption }) {
   const [searchValue, setSearchValue] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [userId, setuserId] = useState("");
 
   const handleSearchChange = (e) => {
     setSearchValue(e.target.value);
@@ -19,10 +22,19 @@ function Navbar({ changeOption }) {
   const handleSearch = () => {
     console.log("Searching for:", searchValue);
   };
+  const navigate = useNavigate();
 
-  const handleLogout = () => {
-    // Implement your logout functionality here
-    console.log("Logout button clicked");
+  const handleLogout = async () => {
+    const { data } = await axios.post("http://localhost:3000/auth/logout", {
+      userId,
+    });
+
+    if (data.error) {
+      return alert("dont process logout");
+    }
+
+    alert("logout in successfully");
+    return navigate("/");
   };
 
   const toggleDropdown = () => {

@@ -1,5 +1,5 @@
 const joi = require("joi");
-const { login } = require("../servise/authService");
+const { login, logout } = require("../servise/authService");
 
 const loginSchema = joi.object().keys({
   email: joi.string().email().required(),
@@ -31,9 +31,20 @@ module.exports = {
       });
     }
   },
-  logout: (req, res) => {
-    return res.send({
-      message: "You successfully logout",
-    });
+  logout: async (req, res) => {
+    try {
+      await logout(req.body);
+
+      res.clearCookie("cookie");
+
+      return res.send({
+        message: "You have been successfully logged out",
+      });
+    } catch (error) {
+      return res.send({
+        message: "Failed to logout",
+        error: error.message,
+      });
+    }
   },
 };

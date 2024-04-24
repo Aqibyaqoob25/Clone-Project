@@ -99,38 +99,40 @@ function Signup({ setLogin }) {
               onChange={(e) => setYear(e.target.value)}
             />
           </div>
-          <div className="flex mb-2">
-            <label className="mr-4">
-              Female
+          <div className="flex mb-2 items-center">
+            <span className="mr-4 text-gray-800">Gender:</span>
+            <label className="inline-flex items-center mr-4">
               <input
                 type="radio"
                 value="female"
                 name="gender"
-                className="ml-2"
+                className="form-radio text-green-500 focus:ring-green-500"
                 onChange={(e) => setGender(e.target.value)}
               />
+              <span className="ml-2 text-gray-800">Female</span>
             </label>
-            <label className="mr-4">
-              Male
+            <label className="inline-flex items-center mr-4">
               <input
                 type="radio"
                 value="male"
                 name="gender"
-                className="ml-2"
+                className="form-radio text-blue-500 focus:ring-blue-500"
                 onChange={(e) => setGender(e.target.value)}
               />
+              <span className="ml-2 text-gray-800">Male</span>
             </label>
-            <label>
-              Custom
+            <label className="inline-flex items-center">
               <input
                 type="radio"
                 value="custom"
                 name="gender"
-                className="ml-2"
+                className="form-radio text-purple-500 focus:ring-purple-500"
                 onChange={(e) => setGender(e.target.value)}
               />
+              <span className="ml-2 text-gray-800">Custom</span>
             </label>
           </div>
+
           <button
             className="w-full bg-green-600 text-white rounded-md py-2 focus:outline-none hover:bg-green-700"
             onClick={handleSignup}
